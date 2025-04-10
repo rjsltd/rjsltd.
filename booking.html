@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirm Booking | RJS.LTD</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">RJS.LTD</div>
+    <nav>
+      <a href="index.html">Home</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Confirm Your Booking</h2>
+    <div id="bookingDetails" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 80%; margin: 0 auto;"></div>
+    <br>
+    <button onclick="confirmBooking()">Pay Now</button>
+  </section>
+
+  <script>
+    const url = new URLSearchParams(window.location.search);
+    const details = {
+      airline: url.get("airline"),
+      from: url.get("from"),
+      to: url.get("to"),
+      date: url.get("date"),
+      time: url.get("time"),
+      price: url.get("price"),
+      travelers: url.get("travelers")
+    };
+
+    document.getElementById("bookingDetails").innerHTML = `
+      <p>Airline: <strong>${details.airline}</strong></p>
+      <p>From: ${details.from} → To: ${details.to}</p>
+      <p>Date: ${details.date} | Time: ${details.time}</p>
+      <p>Travelers: ${details.travelers}</p>
+      <p>Total Price: ₹${details.price * details.travelers}</p>
+    `;
+
+    function confirmBooking() {
+      alert("✅ Booking Confirmed! A confirmation email will be sent.");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flight Results | RJS.LTD</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">RJS.LTD</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Available Flights</h1>
+    <div id="flightResults"></div>
+  </section>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const from = params.get("from");
+    const to = params.get("to");
+    const date = params.get("date");
+    const travelers = params.get("travelers");
+
+    const flights = [
+      { airline: "Air India", time: "09:00 AM", price: 3500 },
+      { airline: "IndiGo", time: "02:00 PM", price: 4200 },
+      { airline: "SpiceJet", time: "07:30 PM", price: 3900 }
+    ];
+
+    const resultsDiv = document.getElementById("flightResults");
+
+    flights.forEach((flight, i) => {
+      const card = document.createElement("div");
+      card.innerHTML = `
+        <div style="padding: 20px; background: white; margin: 15px auto; border-radius: 10px; width: 80%; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
+          <h3>${flight.airline}</h3>
+          <p>From: ${from} → To: ${to}</p>
+          <p>Date: ${date} | Time: ${flight.time}</p>
+          <p>Travelers: ${travelers} | Price: ₹${flight.price}</p>
+          <a href="booking.html?airline=${flight.airline}&from=${from}&to=${to}&date=${date}&time=${flight.time}&price=${flight.price}&travelers=${travelers}">
+            <button>Book Now</button>
+          </a>
+        </div>
+      `;
+      resultsDiv.appendChild(card);
+    });
+  </script>
+</body>
+</html>
